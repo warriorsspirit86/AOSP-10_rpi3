@@ -1,6 +1,6 @@
 Read it first : https://github.com/android-rpi/local_manifests/tree/android10     
     
-# Build Kernel    
+## Build Kernel    
 ```
 $ sudo apt install gcc-arm-linux-gnueabihf libssl-dev    
 $ cd kernel/rpi    
@@ -9,12 +9,12 @@ $ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make zImage
 $ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make dtbs    
 ```
     
-# Install python mako module    
+## Install python mako module    
 ```
  $ sudo apt install python-mako    
 ```
     
-# Build Android source    
+## Build Android source    
 ```
  Continue build with http://source.android.com/source/building.html    
  $ source build/envsetup.sh    
@@ -22,7 +22,7 @@ $ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make dtbs
  $ make ramdisk systemimage vendorimage    
 ```
 
-# Prepare sd card    
+## Prepare sd card    
 
 Partitions of the card should be set-up like followings.    
 p1 256MB for BOOT : Do fdisk : W95 FAT32(LBA) & Bootable, mkfs.vfat    
@@ -35,16 +35,15 @@ p3 128MB for /vendor : Do fdisk, new primary partition
 p4 remainings for /data : Do fdisk, mkfs.ext4    
 et volume label for /data partition as userdata    
 : use -L option of mkfs.ext4, e2label command, or -n option of mkfs.vfat    
-```
-    
-# Write system & vendor partition    
+
+## Write system & vendor partition    
 ```
   $ cd out/target/product/rpi3    
   $ sudo dd if=system.img of=/dev/<p2> bs=1M    
   $ sudo dd if=vendor.img of=/dev/<p3> bs=1M    
 ```
   
-# Copy kernel & ramdisk to BOOT partition    
+## Copy kernel & ramdisk to BOOT partition    
 ```
   device/brcm/rpi3/boot/* to p1:/    
   kernel/rpi/arch/arm/boot/zImage to p1:/    
@@ -53,7 +52,7 @@ et volume label for /data partition as userdata
   out/target/product/rpi3/ramdisk.img to p1:/    
 ```
     
-# HDMI_MODE : If DVI monitor does not work, try followings for p1:/config.txt    
+## HDMI_MODE : If DVI monitor does not work, try followings for p1:/config.txt    
 ```
   hdmi_group=2    
   hdmi_mode=85    
